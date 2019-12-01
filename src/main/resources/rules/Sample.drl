@@ -1,0 +1,39 @@
+package com.sample
+ 
+import com.sample.DroolsTest.Answer
+import com.sample.DroolsTest.GUI
+import java.util.List
+import java.util.ArrayList
+import java.util.Arrays
+
+global GUI gui
+global List<String> yes_no
+
+
+rule "q1"
+	when
+	then
+		String answer = gui.display("Czy chcesz to zdac??", yes_no);
+		insert(new Answer("q1", answer));
+end
+
+rule "q2_yes"
+	when
+		Answer(question == "q1" && answer == "yes")
+	then
+		String answer = gui.display("Odpowiedziales tak", yes_no);
+		System.out.println("q2 " + answer);
+end
+
+
+rule "q2_no"
+	when
+		Answer(question == "q1" && answer == "no")
+	then
+		List<String> ans = new ArrayList<>();
+		ans.add("a");
+		ans.add("b");
+		ans.add("c");
+		String answer = gui.display("Odpowiedziales nie", ans);
+		System.out.println("q2 " + answer);
+end
