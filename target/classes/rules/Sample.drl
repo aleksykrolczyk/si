@@ -7,33 +7,77 @@ import java.util.ArrayList
 import java.util.Arrays
 
 global GUI gui
-global List<String> yes_no
 
-
-rule "q1"
+rule "Are you bankrolling this entire enterprise, player?"
 	when
 	then
-		String answer = gui.display("Czy chcesz to zdac??", yes_no);
-		insert(new Answer("q1", answer));
-end
-
-rule "q2_yes"
-	when
-		Answer(question == "q1" && answer == "yes")
-	then
-		String answer = gui.display("Odpowiedziales tak", yes_no);
-		System.out.println("q2 " + answer);
+		String question = "Are you bankrolling this entire enterprise, player?";
+		List<String> answers = new ArrayList<>();
+		answers.add("They pay half, I pay half. JK, i pay for most of it");
+		answers.add("Yes, against all scientific odds I'm made of money");
+		answers.add("No, my kid's take-home pay is higher than mine, so he's paying for all of it");
+	
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
 end
 
 
-rule "q2_no"
+rule "Who will spend their hard-earned cash on apps, overages and other charges your kid makes 'by mistake'?"
 	when
-		Answer(question == "q1" && answer == "no")
+		Answer(
+			question == "Are you bankrolling this entire enterprise, player?" &&
+			 (answer == "They pay half, I pay half. JK, i pay for most of it" ||
+			  answer == "Yes, against all scientific odds I'm made of money")
+		  )
 	then
-		List<String> ans = new ArrayList<>();
-		ans.add("a");
-		ans.add("b");
-		ans.add("c");
-		String answer = gui.display("Odpowiedziales nie", ans);
-		System.out.println("q2 " + answer);
+		String question = "Who will spend their hard-earned cash on apps, overages and other charges your kid makes 'by mistake'?";
+		List<String> answers = new ArrayList<>();
+		answers.add("She will. I mentioned it twice, so i think she gets it");
+		answers.add("Whatever, I'm a human ATM");
+		
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
+rule "Mmm-hmm. What will you do next year when she wants a new phone?"
+	when
+		Answer(
+			question == "Do you think she will answer your urgent calls and texts right away/quickly/ever?" &&
+			answer == "No. It's like I'm invisible. Can you see me?"
+		)
+	then
+		String question ="Mmm-hmm. What will you do next year when she wants a new phone?";
+		List<String> answers = new ArrayList<>();
+		answers.add("Whatever. I'm a human ATM");
+		answers.add("I will tell the story of how we used to land lines. And make her clean out the garbage.");
+		
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
+rule "DON'T GET A PHONE. Why not spend that money on a Disney cruise? That should buy you at least a year"
+	when
+		Answer(
+			(question == "Are you about to snap under the crushing weight of constant whining" &&
+			answer == "Actually, he never brought it up. I was just thinking..")
+			||
+			(question == "Are you going to shell out extra money for Apple Care, extra insurance or an unbreakable case?" &&
+			answer == "Is there an unbreakable case I can shove my kid into?")
+			||
+			(question == "Will you pony up and get him another phone?" &&
+			answer == "What? NO. Get a job, you mooch")
+		)
+	then
+		String question = "DON'T GET A PHONE. Why not spend that money on a Disney cruise? That should buy you at least a year";
+		insert( new Answer(question, "exit") );
+end
+
+rule "Exit"
+	when
+		ans: Answer(answer == "exit")
+	then
+		List<String> answers = new ArrayList<>();
+		answers.add("Done :- )");
+		gui.display(ans.question, answers);
+		gui.dispose();
 end
