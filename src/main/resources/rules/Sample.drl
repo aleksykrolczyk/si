@@ -8,7 +8,7 @@ import java.util.Arrays
 
 global GUI gui
 
-rule "Are you bankrolling this entire enterprise, player?"
+rule "[1] Are you bankrolling this entire enterprise, player?"
 	when
 	then
 		String question = "Are you bankrolling this entire enterprise, player?";
@@ -22,7 +22,7 @@ rule "Are you bankrolling this entire enterprise, player?"
 end
 
 
-rule "Who will spend their hard-earned cash on apps, overages and other charges your kid makes 'by mistake'?"
+rule "[6] Who will spend their hard-earned cash on apps, overages and other charges your kid makes 'by mistake'?"
 	when
 		Answer(
 			question == "Are you bankrolling this entire enterprise, player?" &&
@@ -39,7 +39,7 @@ rule "Who will spend their hard-earned cash on apps, overages and other charges 
 		insert( new Answer(question, choice) );
 end
 
-rule "Mmm-hmm. What will you do next year when she wants a new phone?"
+rule "[13] Mmm-hmm. What will you do next year when she wants a new phone?"
 	when
 		Answer(
 			question == "Do you think she will answer your urgent calls and texts right away/quickly/ever?" &&
@@ -55,7 +55,7 @@ rule "Mmm-hmm. What will you do next year when she wants a new phone?"
 		insert( new Answer(question, choice) );
 end
 
-rule "DON'T GET A PHONE. Why not spend that money on a Disney cruise? That should buy you at least a year."
+rule "[A] DON'T GET A PHONE. Why not spend that money on a Disney cruise? That should buy you at least a year."
 	when
 		Answer(
 			(question == "Are you about to snap under the crushing weight of constant whining?" &&
@@ -72,7 +72,7 @@ rule "DON'T GET A PHONE. Why not spend that money on a Disney cruise? That shoul
 		insert( new Answer(question, "exit") );
 end
 
-rule "GET THE PHONE AND DON'T LOOK BACK! You're aware of all of the frustrations, tears and money you'll go through, but it's still worth it. It's like having kids, except phones are way cooler."
+rule "[B] GET THE PHONE AND DON'T LOOK BACK! You're aware of all of the frustrations, tears and money you'll go through, but it's still worth it. It's like having kids, except phones are way cooler."
 	when 
 		Answer(
 			(question == "If you say yes, can you use this as leverage to get something you want?" &&
@@ -89,7 +89,7 @@ rule "GET THE PHONE AND DON'T LOOK BACK! You're aware of all of the frustrations
 		insert( new Answer(question, "exit") );
 end
 
-rule "WHY ARE YOU EVEN ASKING? Get a phone, live your life and savour this beautiful time together."
+rule "[C] WHY ARE YOU EVEN ASKING? Get a phone, live your life and savour this beautiful time together."
 	when
 		Answer(
 			(question == "Have you also promised her a puppy?" &&
@@ -103,17 +103,113 @@ rule "WHY ARE YOU EVEN ASKING? Get a phone, live your life and savour this beaut
 		insert( new Answer(question, "exit") );
 end
 		
-rule "BUY KEVIN A PHONE! And congrats on creating your own A.I. Can you biuld me a Kevin too?"
+rule "[D] BUY KEVIN A PHONE! And congrats on creating your own A.I. Can you build me a Kevin too?"
 	when 
 		Answer(
 			question == "Do you have a HUMAN child?" &&
 			answer == "Kinda? I have a robot I built in my basement. I named him Kevin."
 		)
 	then
-		String question = "BUY KEVIN A PHONE! And congrats on creating your own A.I. Can you biuld me a Kevin too?";
+		String question = "BUY KEVIN A PHONE! And congrats on creating your own A.I. Can you build me a Kevin too?";
 		insert( new Answer(question, "exit") );
 end
+
+rule "[0] Has she ever had a phone?"
+	when
+	then
+		String question = "Has she ever had a phone?";
+		List<String> answers = new ArrayList<>();
+		answers.add("No but she's always wanted one.");
+		answers.add("No but I feel like she needs it");
+		answers.add("She's taking my phone too often. Should I hide it?");
+		answers.add("She already has an old one");
 		
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
+rule "[2] Are you about to snap under the crushing weight of constant whining?"
+	when
+	then
+		String question = "Are you about to snap under the crushing weight of constant whining?";
+		List<String> answers = new ArrayList<>();
+		answers.add("Yes. This is all my kid talks about. I am slowly dying.");
+		answers.add("Actually, he never brought it up. I was just thinking...");
+		answers.add("She just won't stop. MAKE IT STOP");
+		
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+		
+		
+rule "[7] HA HA good one. Do your kids always follow your rules?"
+	when
+		Answer(
+			(question == "Do you mind if your kid never looks up from her phone again?" &&
+			answer == "Actually, I have strict rules about the amount of time she will spend on her phone")
+			||
+			(question == "Do you think she will answer your urgent calls and texts right away/quickly/ever?" &&
+			answer == "I found this cel phone agreement online. She signed it, so I think we're good")
+		)
+	then
+		String question = "HA HA good one. Do your kids always follow your rules?";
+		List<String> answers = new ArrayList<>();
+		answers.add("HELL YEAH. They better");
+		answers.add("Of course. They are my sweet angels <3.");
+		
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
+rule "[8] Can you handle him losing his phone like, LITERALLY everywhere?"
+	when
+		Answer(
+			(question == "Do you mind if your kid never looks up from her phone again?" &&
+			answer == "On sec, I'm just finishing a game of Bejeweled")
+			||
+			(question == "Do you think she will answer your urgent calls and texts right away/quickly/ever?" &&
+			answer == "No. It's like I'm invisible. Can you see me?")
+		)
+	then
+		String question = "Can you handle him losing his phone like, LITERALLY everywhere?";
+		List<String> answers = new ArrayList<>();
+		answers.add("Hang on. I can't find my phone. Can you call it?");
+		answers.add("Nope. SHUT ID DOWN");
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
+rule "[14] Do you have a HUMAN child?"
+	when
+		Answer(
+			(question == "Who will spend their hard-earned cash on apps, overages and other charges your kid makes \"by mistake?\"" &&
+			answer == "She will. I mentioned it twice, so I think she gets it.")
+			||
+			(question == "HA HA good one. Do your kids always follow your rules?" &&
+			answer == "Of course. They are my sweet angels <3.")
+		)
+	then
+		String question = "Do you have a HUMAN child?";
+		List<String> answers = new ArrayList<>();
+		answers.add("Kinda? I have a robot I build in my basemenent. I named him Kevin.");
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
+rule "[15] Are you being bullied right now?"
+	when
+		Answer(
+			question == "Do you and your kid know about bullying" &&
+			answer == "Um, yeah. Doi."
+		)
+	then
+		String question = "Are you being bullied right now?";
+		List<String> answers = new ArrayList<>();
+		answers.add("Yes. Hold me.");
+		answers.add("No more than usual");
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
 rule "Exit"
 	when
 		ans: Answer(answer == "exit")
@@ -123,3 +219,6 @@ rule "Exit"
 		gui.display(ans.question, answers);
 		gui.dispose();
 end
+
+
+
