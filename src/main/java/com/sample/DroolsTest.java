@@ -45,6 +45,7 @@ public class DroolsTest {
     }
     
     public static class GUI extends JFrame{
+    	static final long serialVersionUID = 1;
 		JTextPane textPane = new JTextPane();
 		List<JButton> buttons = new ArrayList<>();
 		Integer WIDTH = 600;
