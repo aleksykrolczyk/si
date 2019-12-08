@@ -330,7 +330,7 @@ rule "[16] If you say yes, can you use this as leverage to get something you wan
 			answer == "No. I mean, maybe? IDK, I'm so tired.")
 		)
 	then
-		String answer = "If you say yes, can you use this as leverage to get something you want?";
+		String question = "If you say yes, can you use this as leverage to get something you want?";
 		List<String> answers = new ArrayList<>();
 		answers.add("Sweet. I can get a hot tub in the backyard!");
 		String choice = gui.display(question, answers);
@@ -344,7 +344,7 @@ rule "[17] Have you also promised her a puppy?"
 			answer == "Yes. Hold me."
 		)
 	then 
-		String answer = "Have you also promised her a puppy?";
+		String question = "Have you also promised her a puppy?";
 		List<String> answers = new ArrayList<>();
 		answers.add("No. I mean, maybe? IDK, I'm so tired.");
 		answers.add("Yes. Finally, I shall be crowned as the greatest parent ever. Bow to me!");
