@@ -1,6 +1,7 @@
 package com.sample;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -8,9 +9,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -49,7 +56,7 @@ public class DroolsTest {
 		JTextPane textPane = new JTextPane();
 		List<JButton> buttons = new ArrayList<>();
 		Integer WIDTH = 600;
-		Integer HEIGTH = 600;
+		Integer HEIGTH = 700;
 		String userAnswer = null;
 
     	public GUI() {
@@ -58,8 +65,17 @@ public class DroolsTest {
     		this.setLayout(new FlowLayout());
     		this.textPane.setPreferredSize(new Dimension(WIDTH,50));
     		this.textPane.setEditable(false);
+    		this.textPane.setOpaque(false);
+    		StyledDocument doc = textPane.getStyledDocument();
+    		SimpleAttributeSet center = new SimpleAttributeSet();
+    		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+    		doc.setParagraphAttributes(0, doc.getLength(), center, false);
     		
-    		this.add(this.textPane, BorderLayout.NORTH);    		
+    		JPanel contentPanel = new JPanel();
+    		Border padding = BorderFactory.createEmptyBorder(30, 0, 0, 0);
+    		contentPanel.setBorder(padding);
+    		this.setContentPane(contentPanel);
+    		this.add(this.textPane, BorderLayout.NORTH);    
     	}
     	
     	public String display(String question, List<String> answers) {
@@ -72,7 +88,7 @@ public class DroolsTest {
     				Thread.sleep(100);
     			}
     			catch(Exception e){
-    				System.out.println("pozdro dla mamy i taty");
+    				System.out.println("Cos poszlo nie tak :- (");
     			}
     		}
     		

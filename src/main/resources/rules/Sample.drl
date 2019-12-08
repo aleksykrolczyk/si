@@ -379,7 +379,7 @@ rule "Exit"
 		ans: Answer(answer == "exit")
 	then
 		List<String> answers = new ArrayList<>();
-		answers.add("Done :- )");
+		answers.add("Exit.");
 		gui.display(ans.question, answers);
 		gui.dispose();
 end
