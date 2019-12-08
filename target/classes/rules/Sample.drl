@@ -352,6 +352,24 @@ rule "[17] Have you also promised her a puppy?"
 		insert( new Answer(question, choice) );
 end
 
+rule "[18] Are you going to shell out extra money for Apple Care, extra insurance cor an unbreakable case?"
+	when
+		Answer(
+			(question == "Will you pony up and get him another phone?" &&
+			answer == "Yes, but he will work it off with hard manual labour around the house until the end of days.")
+			||
+			(question == "Mmm-hmm. What will you do next year when she wants a new phone?" &&
+			answer == "I will tell the story of how we used to land lines. And make her clean out the garbage.")
+		)
+	then
+		String question = "Are you going to shell out extra money for Apple Care, extra insurance cor an unbreakable case?";
+		List<String> answers = new ArrayList<>();
+		answers.add("Is there an unbreakable case I can shove my kid into?");
+		answers.add("Whatever. I'm a human ATM.");
+		String choice = gui.display(question, answers);
+		insert( new Answer(question, choice) );
+end
+
 rule "Exit"
 	when
 		ans: Answer(answer == "exit")
