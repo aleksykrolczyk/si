@@ -49,7 +49,7 @@ public class DroolsTest {
 		JTextPane textPane = new JTextPane();
 		List<JButton> buttons = new ArrayList<>();
 		Integer WIDTH = 600;
-		Integer HEIGTH = 800;
+		Integer HEIGTH = 600;
 		String userAnswer = null;
 
     	public GUI() {

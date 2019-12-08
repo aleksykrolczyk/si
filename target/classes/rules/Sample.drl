@@ -27,14 +27,14 @@ end
 rule "[3] Do you mind if your kid never looks up from her phone again?"
 	when
 		Answer(
-			question == "Has she ever has a phone?" &&
-			answer == "No, but I feel like she needs it."
+			question == "Has she ever had a phone?" &&
+			answer == "No but I feel like she needs it."
 		)
 	then
 		String question = "Do you mind if your kid never looks up from her phone again?";
 		List<String> answers = new ArrayList<>();
 		answers.add("Actually, I have strict rules about the amount of time she will spend on her phone.");
-		answers.add("One sec, I'm just finishing a game of Bejeweled");
+		answers.add("One sec, I'm just finishing a game of Bejeweled.");
 		String choice = gui.display(question, answers);
 		insert( new Answer(question, choice) );
 end
@@ -42,7 +42,7 @@ end
 rule "[4] How will you feel when your kid drops and smashes the phone one the first day he has it?"
 	when
 		Answer(
-			question == "Has she ever has a phone?" &&
+			question == "Has she ever had a phone?" &&
 			answer == "She's taking my phone too often. Should I hide it?"
 		)
 	then
@@ -58,7 +58,7 @@ end
 rule "[5] Just the one phone?"
 	when
 		Answer(
-			question == "Has she ever has a phone?" &&
+			question == "Has she ever had a phone?" &&
 			answer == "She already has an old one."
 		)
 	then
@@ -88,8 +88,8 @@ end
 rule "[13] Mmm-hmm. What will you do next year when she wants a new phone?"
 	when
 		Answer(
-			question == "Do you think she will answer your urgent calls and texts right away/quickly/ever?" &&
-			answer == "No. It's like I'm invisible. Can you see me?"
+			question == "Just the one phone?" &&
+			answer == "Dude. This isn't The Wire. How many phones does she need?"
 		)
 	then
 		String question = "Mmm-hmm. What will you do next year when she wants a new phone?";
@@ -165,15 +165,19 @@ rule "[0] Has she ever had a phone?"
 		String question = "Has she ever had a phone?";
 		List<String> answers = new ArrayList<>();
 		answers.add("No but she's always wanted one.");
-		answers.add("No but I feel like she needs it");
+		answers.add("No but I feel like she needs it.");
 		answers.add("She's taking my phone too often. Should I hide it?");
-		answers.add("She already has an old one");
+		answers.add("She already has an old one.");
 		String choice = gui.display(question, answers);
 		insert( new Answer(question, choice) );
 end
 
 rule "[2] Are you about to snap under the crushing weight of constant whining?"
 	when
+		Answer(
+			question == "Has she ever had a phone?" &&
+			answer == "No but she's always wanted one."
+		)
 	then
 		String question = "Are you about to snap under the crushing weight of constant whining?";
 		List<String> answers = new ArrayList<>();
@@ -207,7 +211,7 @@ rule "[8] Can you handle him losing his phone like, LITERALLY everywhere?"
 	when
 		Answer(
 			(question == "Do you mind if your kid never looks up from her phone again?" &&
-			answer == "On sec, I'm just finishing a game of Bejeweled")
+			answer == "One sec, I'm just finishing a game of Bejeweled.")
 			||
 			(question == "Do you think she will answer your urgent calls and texts right away/quickly/ever?" &&
 			answer == "No. It's like I'm invisible. Can you see me?")
@@ -216,7 +220,7 @@ rule "[8] Can you handle him losing his phone like, LITERALLY everywhere?"
 		String question = "Can you handle him losing his phone like, LITERALLY everywhere?";
 		List<String> answers = new ArrayList<>();
 		answers.add("Hang on. I can't find my phone. Can you call it?");
-		answers.add("Nope. SHUT ID DOWN");
+		answers.add("Nope. SHUT IT DOWN.");
 		String choice = gui.display(question, answers);
 		insert( new Answer(question, choice) );
 end
@@ -226,13 +230,13 @@ rule "[9] Are you seriously shocked that he lost his phone?"
 		Answer(
 			question == "Can you handle him losing his phone like, LITERALLY everywhere?" &&
 			(answer == "Hang on. I can't find my phone. Can you call it?" ||
-			answer == "Nope. SHUT IT DOWN.")
+				answer == "Nope. SHUT IT DOWN.")
 		)
 	then
 		String question = "Are you seriously shocked that he lost his phone?";
 		List<String> answers = new ArrayList<>();
 		answers.add("I guess not. Just leave me alone and let me drink.");
-		answers.add("This is my first dat with my kid. We're still getting to know each other.");
+		answers.add("This is my first day with my kid. We're still getting to know each other.");
 		String choice = gui.display(question, answers);
 		insert( new Answer(question, choice) );
 end
@@ -271,7 +275,7 @@ rule "[12] Will you pony up and get him another phone?"
 		Answer(
 			(question == "Are you seriously shocked that he lost his phone?" &&
 			answer == "I guess not. Just leave me alone and let me drink." || 
-			answer == "This is my first dat with my kid. We're still getting to know each other.")
+			answer == "This is my first day with my kid. We're still getting to know each other.")
 			||
 			(question == "How will you feel when your kid drops and smashes the phone one the first day he has it?" &&
 			answer == "Now it looks like my phone. Neat!" ||
@@ -352,7 +356,7 @@ rule "[17] Have you also promised her a puppy?"
 		insert( new Answer(question, choice) );
 end
 
-rule "[18] Are you going to shell out extra money for Apple Care, extra insurance cor an unbreakable case?"
+rule "[18] Are you going to shell out extra money for Apple Care, extra insurance or an unbreakable case?"
 	when
 		Answer(
 			(question == "Will you pony up and get him another phone?" &&
@@ -362,7 +366,7 @@ rule "[18] Are you going to shell out extra money for Apple Care, extra insuranc
 			answer == "I will tell the story of how we used to land lines. And make her clean out the garbage.")
 		)
 	then
-		String question = "Are you going to shell out extra money for Apple Care, extra insurance cor an unbreakable case?";
+		String question = "Are you going to shell out extra money for Apple Care, extra insurance or an unbreakable case?";
 		List<String> answers = new ArrayList<>();
 		answers.add("Is there an unbreakable case I can shove my kid into?");
 		answers.add("Whatever. I'm a human ATM.");
