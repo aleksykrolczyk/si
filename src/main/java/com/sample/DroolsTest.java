@@ -40,17 +40,7 @@ public class DroolsTest {
             t.printStackTrace();
         }
     }
-    
-    public static class Answer{
-    	public String question;
-    	public String answer;
-    	
-    	public Answer(String question, String answer) {
-    		this.question = question;
-    		this.answer = answer;
-    	}
-    }
-    
+        
     public static class GUI extends JFrame{
     	static final long serialVersionUID = 1;
 		JTextPane textPane = new JTextPane();
@@ -63,7 +53,7 @@ public class DroolsTest {
     		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     		this.setSize(WIDTH + 50, HEIGTH);
     		this.setLayout(new FlowLayout());
-    		this.textPane.setPreferredSize(new Dimension(WIDTH,50));
+    		this.textPane.setPreferredSize(new Dimension(WIDTH,100));
     		this.textPane.setEditable(false);
     		this.textPane.setOpaque(false);
     		StyledDocument doc = textPane.getStyledDocument();

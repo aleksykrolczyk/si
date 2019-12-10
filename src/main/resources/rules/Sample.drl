@@ -1,12 +1,19 @@
 package com.sample
  
-import com.sample.DroolsTest.Answer
 import com.sample.DroolsTest.GUI
 import java.util.List
 import java.util.ArrayList
 import java.util.Arrays
 
 global GUI gui
+
+declare Answer
+	question : String
+	answer : String
+end
+
+
+
 
 rule "[1] Are you bankrolling this entire enterprise, player?"
 	when
@@ -380,7 +387,7 @@ rule "Exit"
 	then
 		List<String> answers = new ArrayList<>();
 		answers.add("Exit.");
-		gui.display(ans.question, answers);
+		gui.display("What you should do:\n\n" + ans.getQuestion(), answers);
 		gui.dispose();
 end
 
